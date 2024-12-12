@@ -1,34 +1,11 @@
+package adventOfCode2024.day2;
 import java.io.*;
 import java.util.*;
-public class challenge1 {
+import adventOfCode2024.fileInput;
+public class challenge2 {
     public static void main(String[] args) {
-        Scanner userIn = new Scanner(System.in);
-        String filePath = ""; 
-        if(args.length > 0){
-            filePath = args[0];
-        } else {
-            System.out.println("Input a file path");
-            filePath = userIn.nextLine();
-        }
-        Scanner fileIn = null;
-        File file = new File(filePath);
-        try{
-            fileIn = new Scanner(file);
-        } catch(FileNotFoundException fnf){
-            boolean worked = false;
-            while(!worked){
-                System.out.println("Your file path does not exist try a different one");
-                filePath = userIn.nextLine();
-                try{
-                    file = new File(filePath);
-                    fileIn = new Scanner(file);
-                    worked = true;
-                } catch(FileNotFoundException fnf2){
-                    worked = false;
-                }
-            }
-        }
-
+        //this line calls to the parent class to do file input
+        Scanner fileIn = fileInput.fileIn(args);
         String line = "";
         String[] lineSplit = new String[10];
         ArrayList<Integer> integerArr = new ArrayList<>();
