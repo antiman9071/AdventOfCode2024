@@ -4,4 +4,6 @@ In both challenges the code was written to either take a user input or the file 
 To do this I copied the first half of my code to take all of the inputs and my first thought when it asked to count the number of occurrences was a hash map, and because this was only for the left list I made one hash map and kept the array list for the right list. I did this for the same reason as before: so that I only had to go through the file once. After all of the data was in its respective ArrayList/Hash map I created a for loop that simply checked if the integer at the index was in the map, if it was I added 1 to the value of the map otherwise the value was discarded. Afterwards, I made a new for-each loop that got the similarity score which was done by taking the value and multiplying it by the key and adding it to the total.
 
 Syntax for both challenges
-java challenge#.java input.txt OR java challenge#.java
+This changed since the first commit as I went back and updated them with a unified file input system, because of this the syntax is 
+java adventOfCode2024.day1.challenge# day\ 1/input.txt
+where # is the challenge number
