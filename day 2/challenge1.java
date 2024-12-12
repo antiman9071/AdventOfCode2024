@@ -2,7 +2,7 @@ package adventOfCode2024.day2;
 import java.io.*;
 import java.util.*;
 import adventOfCode2024.fileInput;
-public class challenge2 {
+public class challenge1 {
     public static void main(String[] args) {
         //this line calls to the parent class to do file input
         Scanner fileIn = fileInput.fileIn(args);
