@@ -33,6 +33,7 @@ public class fileInput {
                 }
             }
         }
+        //this returns the object to the scanner
         return fileIn;
     }
 }
