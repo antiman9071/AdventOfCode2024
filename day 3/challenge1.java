@@ -1,4 +1,4 @@
-package adventOfCode2024.day3;
+package adventOfCode2025.day3;
 import java.io.*;
 import java.util.*;
 import java.util.regex.*;
