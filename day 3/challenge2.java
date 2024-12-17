@@ -7,93 +7,52 @@ public class challenge2 {
     public static void main(String[] args) {
         //this line calls to the parent class to do file input
         Scanner fileIn = fileInput.fileIn(args);
-        String line = "";
+        String fullText = "";
         Pattern patternDO = Pattern.compile("do\\(\\)");
         Matcher matcherDO;
         Pattern patternDONT = Pattern.compile("don't\\(\\)");
         Matcher matcherDONT;
-        String part;
+        TreeMap<Integer, Boolean> conditionList = new TreeMap<>();
         long total = 0;
         String[] splitOutput;
         String[] splitOutputDO;
-        String lineSub = "";
-        int start = 0;
-        int end = 0;
-        boolean mult = true;
-        boolean doFound = false;
-        boolean dontFound = false;
+        boolean doFound;
+        boolean dontFound;
         while(fileIn.hasNext()){
-            line = fileIn.nextLine();
-            matcherDONT = patternDONT.matcher(line);
-            matcherDO = patternDO.matcher(line);
+            fullText += fileIn.nextLine();
+        }
+        matcherDONT=patternDONT.matcher(fullText);
+        matcherDO=patternDO.matcher(fullText);
+        doFound = matcherDO.find();
+        dontFound = matcherDONT.find();
+        while(doFound || dontFound){
+            if(doFound && dontFound){
+                if(matcherDO.end() > matcherDONT.end()){
+                    conditionList.put(matcherDO.end(), true);
+                    conditionList.put(matcherDONT.end(), false);
+                } else {
+                    conditionList.put(matcherDONT.end(), false);
+                    conditionList.put(matcherDO.end(), true);
+                }
+            } else if(doFound){
+                conditionList.put(matcherDO.end(), true);
+            } else {
+                conditionList.put(matcherDONT.end(), false);
+            }
             doFound = matcherDO.find();
             dontFound = matcherDONT.find();
-            while(doFound || dontFound){
-                if(end == 0){
-                    start = 0;
-                    try{
-                        end = matcherDONT.end();
-                    } catch (Exception e){
-                        end = line.length()-1;
-                        System.out.println(e);
-                    }
-                    mult = false;
-                } else {
-                    start = end;
-                    if(mult){
-                        try{
-                            end = matcherDONT.end();
-                        } catch (Exception e){
-                            end = line.length()-1;
-                            System.out.println(e);
-                        }
-                        mult = false;
-                    } else {
-                        try{
-                            end = matcherDO.end();
-                        } catch (Exception e){
-                            end = line.length()-1;
-                            System.out.println(e);
-                        }
-                        mult = true;
-                    }
-                }
-                if(!mult){
-                    try{
-                        lineSub = line.substring(start, end);
-                    } catch(Exception e){
-                        lineSub = line.substring(start);
-                    }
-                    total += work(lineSub);
-                }
-                start = end;
-                if(mult){
-                    try{
-                        end = matcherDONT.end();
-                    } catch(Exception e){
-                        end = line.length()-1;
-                        System.out.println(e);
-                    }
-                    mult = false;
-                } else {
-                    try{
-                        end = matcherDO.end();
-                    } catch (Exception e){
-                        end = line.length()-1;
-                        System.out.println(e);
-                    }
-                    mult = true;
-                }
-                if(!mult){
-                    lineSub = line.substring(start, end);
-                    total += work(lineSub);
-                } 
-                doFound = matcherDO.find();
-                dontFound = matcherDONT.find();
-            }
         }
-        lineSub = line.substring(end);
-        total += work(lineSub);
+        String line;
+        int last = 0;
+        boolean lastBool = true;
+        for(Map.Entry<Integer, Boolean> i: conditionList.entrySet()){
+            line = fullText.substring(last, i.getKey());
+            if(lastBool){
+                total += work(line);
+            }
+            last = i.getKey();
+            lastBool = i.getValue();
+        }
         System.out.println(total);
     }
     public static long work(String line){
