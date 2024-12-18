@@ -10,5 +10,5 @@ beginning of a substring. I also stored the value as the true or false would be 
 substring to a function that was effectively the challenge 1 solution and returned the answer.
 
 Syntax for both challenges
-java adventOfCode2024.day1.challenge# day\ 1/input.txt where # is the challenge number
+java adventOfCode2024.day3.challenge# day\ 3/input.txt where # is the challenge number
 
