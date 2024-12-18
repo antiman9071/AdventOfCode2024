@@ -10,4 +10,4 @@ by trying the first function with every ArrayList with one element removed(and t
 if there were any possibilities where the answer was true and returned false otherwise.
 
 Syntax for both challenges      
-java adventOfCode2024.day1.challenge# day\ 1/input.txt where # is the challenge number
+java adventOfCode2024.day2.challenge# day\ 2/input.txt where # is the challenge number
